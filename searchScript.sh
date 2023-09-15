@@ -9,8 +9,8 @@ project_path="$1"
 search_string="$2"
 output_file="paths.txt"
 
-# Loop pelos arquivos .tsx e paralelizar a verificação
-for file in $(find "$project_path" -type f -name '*.tsx'); do
+# Loop pelos arquivos .tsx e paralelizar a verificação, ignorando node_modules
+for file in $(find "$project_path" -type f -name '*.tsx' -not -path "*node_modules*"); do
     echo "$file"
 done | parallel -j "$(nproc)" "
     if grep -q '$search_string' {}; then
